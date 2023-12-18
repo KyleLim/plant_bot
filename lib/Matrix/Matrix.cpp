@@ -6,7 +6,8 @@
  * Private Functions
 */
 // Swaps the members of two matrices 
-void Matrix::swap(Matrix &m){
+template <typename T>
+void Matrix<T>::swap(Matrix<T> &m){
     int old_nCols = nCols;
     int old_nRows = nRows;
     nCols = m.nCols;
@@ -14,7 +15,7 @@ void Matrix::swap(Matrix &m){
     m.nCols = old_nCols;
     m.nRows = old_nRows;
 
-    int** old_matrix = matrix;
+    T** old_matrix = matrix;
     matrix = m.matrix;
     m.matrix = old_matrix;
 }
@@ -22,20 +23,21 @@ void Matrix::swap(Matrix &m){
 /************************************
  * Public Functions
 */
-Matrix::Matrix(int _nRows, int _nCols, std::initializer_list<int> list) {
+template <typename T>
+Matrix<T>::Matrix(int _nRows, int _nCols, std::initializer_list<T> list) {
     nRows = _nRows;
     nCols = _nCols;
 
     // allocate (nRows) number of pointers for arrays
-    matrix = new int* [nRows];
+    matrix = new T* [nRows];
     if (matrix == nullptr)
         fprintf(stderr, "Error: Could not allocate memory!");
 
     // allocate arrays with (nCols) number of elements
     for (int i = 0; i < nRows; i++)
     {
-        int** row = matrix + i;
-        *row = new int [nCols];
+        T** row = matrix + i;
+        *row = new T [nCols];
         if (*row == nullptr)
             fprintf(stderr, "Error: Could not allocate memory!");
     }
@@ -52,20 +54,21 @@ Matrix::Matrix(int _nRows, int _nCols, std::initializer_list<int> list) {
         }
     }
 }
-Matrix::Matrix(int _nRows, int _nCols, int init_value) {
+template <typename T>
+Matrix<T>::Matrix(int _nRows, int _nCols, T init_value) {
     nRows = _nRows;
     nCols = _nCols;
 
     // allocate (nRows) number of pointers for arrays
-    matrix = new int* [nRows];
+    matrix = new T* [nRows];
     if (matrix == nullptr)
         fprintf(stderr, "Error: Could not allocate memory!");
 
     // allocate arrays with (nCols) number of elements
     for (int i = 0; i < nRows; i++)
     {
-        int** row = matrix + i;
-        *row = new int [nCols];
+        T** row = matrix + i;
+        *row = new T [nCols];
         if (*row == nullptr)
             fprintf(stderr, "Error: Could not allocate memory!");
     }
@@ -77,38 +80,44 @@ Matrix::Matrix(int _nRows, int _nCols, int init_value) {
         }
     }
 }
-Matrix::Matrix(int _nRows, int _nCols) : Matrix(_nRows, _nCols, 0) {};
+template <typename T>
+Matrix<T>::Matrix(int _nRows, int _nCols) : Matrix(_nRows, _nCols, 0.0) {};
 
 // Copy Constructor
-Matrix::Matrix(Matrix &m) : Matrix(m.nRows, m.nCols) {
+template <typename T>
+Matrix<T>::Matrix(const Matrix<T> &m) : Matrix(m.nRows, m.nCols) {
     for (int i = 0; i < nRows; i++) {
         for (int j = 0; j < nCols; j++) {
             matrix[i][j] = m.matrix[i][j];
         }
     }
 }
-Matrix::~Matrix()
+
+template <typename T>
+Matrix<T>::~Matrix()
 {
     // de-allocate arrays (rows)
     for (int i = 0; i < nRows; i++)
     {
-        int** row = matrix + i;
+        T** row = matrix + i;
         delete[] *row;
     }
     // de-allocate array of pointers
     delete[] matrix;
 }
 
-void Matrix::print(void) {
+template <typename T>
+void Matrix<T>::print(void) {
     for (int i = 0; i < nRows; i++) {
         for (int j = 0; j < nCols; j++) {
-            printf("%d ", matrix[i][j]);
+            printf("%d ", static_cast<int>(matrix[i][j]));
         }
         printf("\n");
     }
 }
 
-void Matrix::print_detailed(void) { // Note this function is silly and not optimized
+template <typename T>
+void Matrix<T>::print_detailed(void) { // Note this function is silly and not optimized
     printf("Matrix: %dx%d\n", nRows, nCols);
     for (int i = 0; i < (3 + (nCols * 4) + 3); i++)
     {
@@ -118,7 +127,7 @@ void Matrix::print_detailed(void) { // Note this function is silly and not optim
     for (int i = 0; i < nRows; i++) {
         printf("| ");
         for (int j = 0; j < nCols; j++) {
-            printf("%-4d ", matrix[i][j]);
+            printf("%-4d ", static_cast<int>(matrix[i][j]));
         }
         printf(" |\n");
     }
@@ -129,7 +138,8 @@ void Matrix::print_detailed(void) { // Note this function is silly and not optim
     printf("\n");
 }
 
-void Matrix::set(std::initializer_list<int> list) {
+template <typename T>
+void Matrix<T>::set(std::initializer_list<T> list) {
     if (list.size() < static_cast<size_t>(nRows * nCols)) {
         printf("Error: Not enough elements specified to initialize %dx%d matrix\n", nRows, nCols);
         return;
@@ -140,23 +150,27 @@ void Matrix::set(std::initializer_list<int> list) {
         }
     }
 }
-void Matrix::set_row(int row, int values[]) {
+template <typename T>
+void Matrix<T>::set_row(int row, T values[]) {
     for (int j = 0; j < nCols; j++) {
         matrix[row][j] = values[j];
     }
 }
-void Matrix::set_col(int col, int values[]) {
+template <typename T>
+void Matrix<T>::set_col(int col, T values[]) {
     for (int i = 0; i < nCols; i++) {
         matrix[i][col] = values[i];
     }
 }
-void Matrix::set_diagonal(int values[]) {
+template <typename T>
+void Matrix<T>::set_diagonal(T values[]) {
     for (int ij = 0; ij < nCols; ij++) {
         matrix[ij][ij] = values[ij];
     }
 }
 
-void Matrix::multiply(Matrix m2) {
+template <typename T>
+void Matrix<T>::multiply(Matrix<T> m2) {
     // Operand dimension check
     if (nCols != m2.nRows) {
         fprintf(stderr, "Error: Inner matrix dimensions must match for multiplication");
@@ -164,7 +178,7 @@ void Matrix::multiply(Matrix m2) {
     }
 
     // Create matrix to store results
-    Matrix m_result(nRows, m2.nCols);
+    Matrix<T> m_result(nRows, m2.nCols);
 
     for (int i1 = 0; i1 < nRows; i1++) {
         for (int j2 = 0; j2 < m2.nCols; j2++){
@@ -180,10 +194,11 @@ void Matrix::multiply(Matrix m2) {
     swap(m_result);
 }
 
-void Matrix::transpose(void) {
+template <typename T>
+void Matrix<T>::transpose(void) {
     // We want a square matrix as big as the largest dimension
     int max = nRows >= nCols ? nRows : nCols;
-    Matrix m_temp(max, max);
+    Matrix<T> m_temp(max, max);
 
     for (int i = 0; i < nRows; i++) {
         for (int j = 0; j < nCols; j++) {
@@ -191,7 +206,7 @@ void Matrix::transpose(void) {
         }
     }
 
-    Matrix m_result(nCols, nRows);
+    Matrix<T> m_result(nCols, nRows);
     for (int i = 0; i < m_result.nRows; i++) {
         for (int j = 0; j < m_result.nCols; j++) {
             m_result.matrix[i][j] = m_temp.matrix[i][j];
@@ -200,3 +215,8 @@ void Matrix::transpose(void) {
 
     swap(m_result);
 }
+
+// Pre-load Common Matrix types
+template class Matrix<int>;
+template class Matrix<float>;
+template class Matrix<double>;

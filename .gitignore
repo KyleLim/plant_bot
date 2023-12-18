@@ -44,3 +44,10 @@ venv
 # VScode
 .vscode/
 .pio/
+.vscode/settings.json
+.vscode/launch.json
+.vscode/c_cpp_properties.json
+.pio/build/project.checksum
+.pio/build/disco_f429zi/idedata.json
+.pio/build/disco_f429zi/firmware.elf
+.pio/build/disco_f429zi/.sconsign311.dblite
