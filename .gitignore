@@ -42,4 +42,5 @@ venv
 .pio
 
 # VScode
-.vscode
+.vscode/
+.pio/
