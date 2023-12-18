@@ -1,6 +1,6 @@
 ---
 title: "Plant Bot Code Package"
-author: Jesse Inouye, Kyle Lim
+author: Jesse Inouye, Kyle Six
 date: December 17, 2023
 geometry: margin=2cm
 output: pdf_document
