@@ -322,7 +322,41 @@ points, T0_1, T0_2, T0_3, T0_4, T0_5, T0_6 = forward_kinematics_with_orientation
 ```
 
 
+# Hardware Prototype
 
+## Approach
+As both of us are Computer Engineering majors, we utilized our skillsets to design and create a physical prototype of a 6R orthogonal manipulator. We decided to focus on achieving affordability, and accuracy to project's subject arm.
+So, we utilized 3D printing (FDM) for cost-effectiveness and lightweight construction. This, integrated with common micro servos and an arm microcontroller created the baseline for our prototype.Then we built a comprehensive C++ code package for driving robot manipulators, emphasizing custom classes for matrix mathematics, and servo PWM controllers.
+
+## Design
+
+### Orthogonal Joints
+With accuracy to the original arm in mind, we started with a mockup of a generic 6R manipulator structure that allows for joint to be along a single axis
+![3D model diagramming a generic 6R manipulator](./images/mockup.png)
+
+### Modular Structure
+Given that 3D-printing allows for "free" complexity, in designing the joints we used a modular design that allows for links to be easily attached from various points on each side of a revolute joint. This took inspiration from the professor's use of "tinker toys" in teaching rotations to the class.
+![A revolute joint allowing for multiple attachment holes](./images/joint.png)  |  ![A transparent view of the joint containing a rotating servo](./images/joint_exploded.png)
+![Modular, link lenths, connector and a sword shaped link](./images/modular_links.png)
+
+### Final Model
+We then assembled these joints, links, and connectors into the shape of the arm for the project.
+![A transparent view of a joint containing a rotating servo, allowing for multiple attachment holes](./images/final_arm.png)
+
+
+## Code
+
+### Matrix.h
+This templated class allows for the creation and manipulation of dynamic matrices of any size. It implements common operators such as Matrix.Transpose() and Matrix.Multiply()
+
+### Servo.h
+This class interfaces with our microcontroller to generate PWM control signals for a connected digital servo. It allows for calibration, home angles, and precise real-time control.
+
+### Manipulator.h & Joint.h
+Serving as the implementation of the theory presented in this course, this class closely models the links of a robotic arm according to the standard DH convention. Links may be dynamically added with desired joint parameters, and then transformation matrices can be calculated from any frame.
+
+## Results
+Due to inconsistencies in 3D-printing and the small amount of torque supplied by micro servos, our design may improved going forward. However, with the limited time of this project, our prototype has proven to be a valuable lessen in the application of the robotics theory presented in our coursework. Further, our prototype's modular design and afforable material selection, contribute to the project's success in not just modeling the given arm for this project, but many other future manipulators with minimal effort. 
 
 ## References
 

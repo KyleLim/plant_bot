@@ -13,6 +13,7 @@ class Manipulator {
     Joint* base = nullptr;
     Joint* end = nullptr;
 
+
     // Matrix* Translation = nullptr;
     // Matrix* Jacobian = nullptr;
 public:
