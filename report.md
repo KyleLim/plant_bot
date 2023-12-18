@@ -325,19 +325,21 @@ points, T0_1, T0_2, T0_3, T0_4, T0_5, T0_6 = forward_kinematics_with_orientation
 # Hardware Prototype
 
 ## Approach
-As both of us are Computer Engineering majors, we utilized our skillsets to design and create a physical prototype of a 6R orthogonal manipulator. We decided to focus on achieving affordability, and accuracy to project's subject arm.
-So, we utilized 3D printing (FDM) for cost-effectiveness and lightweight construction. This, integrated with common micro servos and an arm microcontroller created the baseline for our prototype.Then we built a comprehensive C++ code package for driving robot manipulators, emphasizing custom classes for matrix mathematics, and servo PWM controllers.
+As Computer Engineering majors, we utilized our skillsets to design and create a physical prototype of the 6R orthogonal manipulator. We decided to focus on achieving affordability, and accuracy to project's subject arm. To this aim, we utilized 3D printing (FDM) for cost-effectiveness and lightweight construction. This, integrated with common micro servos and an arm microcontroller created the baseline for our prototype.Then we built a comprehensive C++ code package for driving robot manipulators, emphasizing custom classes for matrix mathematics, and servo PWM controllers.
 
 ## Design
-
-### Orthogonal Joints
-With accuracy to the original arm in mind, we started with a mockup of a generic 6R manipulator structure that allows for joint to be along a single axis
+### Target Structure
+With accuracy to the original arm in mind, a mockup of a generic 6R manipulato structure was created that allows for joint to be along a single axis.
 ![3D model diagramming a generic 6R manipulator](./images/mockup.png)
 
-### Modular Structure
-Given that 3D-printing allows for "free" complexity, in designing the joints we used a modular design that allows for links to be easily attached from various points on each side of a revolute joint. This took inspiration from the professor's use of "tinker toys" in teaching rotations to the class.
+### Modular Assembly
+Given that 3D-printing allows for "free" complexity, in designing the joints a modular design was used that allows for links to be easily attached from various points on each side of a revolute joint. This took inspiration from the professor's use of "tinker toys" in teaching rotations to the class.
 ![A revolute joint allowing for multiple attachment holes](./images/joint.png)  |  ![A transparent view of the joint containing a rotating servo](./images/joint_exploded.png)
+- A revolute joint showing multiple attachment holes (left)
+- A transparent view of the revolute joint showcasing the enclosed servo
+
 ![Modular, link lenths, connector and a sword shaped link](./images/modular_links.png)
+- Modular link lenghts, connectors and a sword-shaped end effector.
 
 ### Final Model
 We then assembled these joints, links, and connectors into the shape of the arm for the project.
@@ -345,7 +347,6 @@ We then assembled these joints, links, and connectors into the shape of the arm 
 
 
 ## Code
-
 ### Matrix.h
 This templated class allows for the creation and manipulation of dynamic matrices of any size. It implements common operators such as Matrix.Transpose() and Matrix.Multiply()
 
@@ -357,6 +358,17 @@ Serving as the implementation of the theory presented in this course, this class
 
 ## Results
 Due to inconsistencies in 3D-printing and the small amount of torque supplied by micro servos, our design may improved going forward. However, with the limited time of this project, our prototype has proven to be a valuable lessen in the application of the robotics theory presented in our coursework. Further, our prototype's modular design and afforable material selection, contribute to the project's success in not just modeling the given arm for this project, but many other future manipulators with minimal effort. 
+
+
+
+## Materials
+Micro-controller, STMF429ZI
+- https://os.mbed.com/platforms/ST-Discovery-F429ZI/ 
+
+Servo Motors, MG90D Robot Servos (Generic)
+- https://www.towerpro.com.tw/product/mg90d-robot-servo/
+
+Arm Structure, 1.75mm PLA (Generic)
 
 ## References
 
