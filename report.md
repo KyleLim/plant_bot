@@ -277,6 +277,10 @@ This function uses Open3d to visualize the 6 DoF robot arm. The links are repres
 visualize_arm([T0_1, T0_2, T0_3, T0_4, T0_5, T0_6])
 ```
 
+The above example will produce an 3D model similar to the following.
+
+![Example visualization](./images/example_vis.png){width=60%}
+
 ---
 
 ## forward_kinematics_with_orientation()
@@ -325,25 +329,28 @@ points, T0_1, T0_2, T0_3, T0_4, T0_5, T0_6 = forward_kinematics_with_orientation
 # Hardware Prototype
 
 ## Approach
-As Computer Engineering majors, we utilized our skillsets to design and create a physical prototype of the 6R orthogonal manipulator. We decided to focus on achieving affordability, and accuracy to project's subject arm. To this aim, we utilized 3D printing (FDM) for cost-effectiveness and lightweight construction. This, integrated with common micro servos and an arm microcontroller created the baseline for our prototype.Then we built a comprehensive C++ code package for driving robot manipulators, emphasizing custom classes for matrix mathematics, and servo PWM controllers.
+As Computer Engineering majors, we utilized our skillsets to design and create a physical prototype of the 6R orthogonal manipulator. We decided to focus on achieving affordability, and accuracy to the project's subject arm. To this aim, we utilized 3D printing (FDM) for cost-effectiveness and lightweight construction. This, integrated with common micro servos and an arm microcontroller created the baseline for our prototype. Then we built a comprehensive C++ code package for driving robot manipulators, emphasizing custom classes for matrix mathematics, and servo PWM controllers.
 
 ## Design
 ### Target Structure
-With accuracy to the original arm in mind, a mockup of a generic 6R manipulato structure was created that allows for joint to be along a single axis.
-![3D model diagramming a generic 6R manipulator](./images/mockup.png)
+With accuracy to the original arm in mind, a mockup of a generic 6R manipulator structure was created that allows for joints to be along a single axis.
+
+![3D model diagramming a generic 6R manipulator](./images/mockup.png){width=50%}
 
 ### Modular Assembly
 Given that 3D-printing allows for "free" complexity, in designing the joints a modular design was used that allows for links to be easily attached from various points on each side of a revolute joint. This took inspiration from the professor's use of "tinker toys" in teaching rotations to the class.
-![A revolute joint allowing for multiple attachment holes](./images/joint.png)  |  ![A transparent view of the joint containing a rotating servo](./images/joint_exploded.png)
-- A revolute joint showing multiple attachment holes (left)
-- A transparent view of the revolute joint showcasing the enclosed servo
 
-![Modular, link lenths, connector and a sword shaped link](./images/modular_links.png)
-- Modular link lenghts, connectors and a sword-shaped end effector.
+![A revolute joint allowing for multiple attachment holes](./images/joint.png){width=40%}
+
+![A transparent view of the revolute joint showcasing the enclosed servo](./images/joint_exploded.png){width=40%}
+
+![Modular, link lengths, connector and a sword shaped link](./images/modular_links.png){width=40%}
+
 
 ### Final Model
 We then assembled these joints, links, and connectors into the shape of the arm for the project.
-![A transparent view of a joint containing a rotating servo, allowing for multiple attachment holes](./images/final_arm.png)
+
+![Top-down view of the full model](./images/final_arm.png)
 
 
 ## Code
