@@ -11,6 +11,7 @@ Servo::Servo(PinName _pin, float _period, int min_pulse, int max_pulse, double _
     pwm->period(period);
     set_angle(home_angle);
 }
+
 Servo::Servo(PinName _pin, float _period, int min_pulse, int max_pulse, double _home_angle, double delta) : Servo::Servo(_pin, _period, min_pulse, max_pulse, _home_angle) {
     min_angle = home_angle - delta;
     max_angle = home_angle + delta;

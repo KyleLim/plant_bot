@@ -54,6 +54,7 @@ Matrix<T>::Matrix(int _nRows, int _nCols, std::initializer_list<T> list) {
         }
     }
 }
+
 template <typename T>
 Matrix<T>::Matrix(int _nRows, int _nCols, T init_value) {
     nRows = _nRows;
@@ -80,6 +81,7 @@ Matrix<T>::Matrix(int _nRows, int _nCols, T init_value) {
         }
     }
 }
+
 template <typename T>
 Matrix<T>::Matrix(int _nRows, int _nCols) : Matrix(_nRows, _nCols, 0.0) {};
 
@@ -150,24 +152,28 @@ void Matrix<T>::set(std::initializer_list<T> list) {
         }
     }
 }
+
 template <typename T>
 void Matrix<T>::set_row(int row, T values[]) {
     for (int j = 0; j < nCols; j++) {
         matrix[row][j] = values[j];
     }
 }
+
 template <typename T>
 void Matrix<T>::set_col(int col, T values[]) {
     for (int i = 0; i < nCols; i++) {
         matrix[i][col] = values[i];
     }
 }
+
 template <typename T>
 void Matrix<T>::set_diagonal(T values[]) {
     for (int ij = 0; ij < nCols; ij++) {
         matrix[ij][ij] = values[ij];
     }
 }
+
 
 template <typename T>
 void Matrix<T>::multiply(Matrix<T> m2) {
